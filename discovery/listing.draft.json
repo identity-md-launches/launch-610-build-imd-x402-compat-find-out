@@ -1,0 +1,136 @@
+{
+  "x402Version": 2,
+  "items": [
+    {
+      "resource": "https://api.imd.fun/requests/:id/submit",
+      "type": "http",
+      "x402Version": 2,
+      "accepts": [
+        {
+          "scheme": "exact",
+          "network": "eip155:1",
+          "amount": "500000000000000000",
+          "asset": "0xd34a99bc0f67ae1bbd63c660e6d0b0dd03e263b7",
+          "payTo": "0x0000000000000000000000000000000000000000",
+          "maxTimeoutSeconds": 60,
+          "extra": {
+            "assetTransferMethod": "permit2"
+          }
+        }
+      ],
+      "lastUpdated": "2026-10-02T00:00:00.000Z",
+      "description": "Quote-bound paid IMD swarm action. First POST /requests/quote, then submit with Permit2 and QuoteApproval using an IMD-aware adapter. Experimental, commissioned as a test of the IMD swarm. It may not work as described. Read the code, start with small amounts, no warranty.",
+      "mimeType": "application/json",
+      "serviceName": "IdentityMD swarm",
+      "tags": [
+        "imd",
+        "agent-actions"
+      ],
+      "extensions": {
+        "bazaar": {
+          "info": {
+            "input": {
+              "type": "http",
+              "method": "POST",
+              "bodyType": "json",
+              "body": {
+                "quoteSignature": "0x..."
+              },
+              "pathParams": {
+                "id": "11111111-2222-4333-8444-555555555555"
+              }
+            },
+            "output": {
+              "type": "json",
+              "example": {
+                "status": "payment_pending"
+              }
+            }
+          },
+          "schema": {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "type": "object",
+            "properties": {
+              "input": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "const": "http"
+                  },
+                  "method": {
+                    "type": "string",
+                    "enum": [
+                      "POST",
+                      "PUT",
+                      "PATCH"
+                    ]
+                  },
+                  "bodyType": {
+                    "type": "string",
+                    "enum": [
+                      "json",
+                      "form-data",
+                      "text"
+                    ]
+                  },
+                  "body": {
+                    "type": "object",
+                    "properties": {
+                      "quoteSignature": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "quoteSignature"
+                    ]
+                  },
+                  "pathParams": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id"
+                    ]
+                  }
+                },
+                "required": [
+                  "type",
+                  "method",
+                  "bodyType",
+                  "body"
+                ],
+                "additionalProperties": false
+              },
+              "output": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "example": {
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "type"
+                ]
+              }
+            },
+            "required": [
+              "input"
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "pagination": {
+    "limit": 1,
+    "offset": 0,
+    "total": 1
+  }
+}

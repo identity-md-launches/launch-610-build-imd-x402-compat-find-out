@@ -1,0 +1,14 @@
+{
+  "name": "imd-x402-compat",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "exports": { ".": "./dist/adapter.js" },
+  "bin": { "imd-x402-compat": "./dist/cli.js" },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node scripts/build.mjs && node --test test/*.test.mjs",
+    "start": "node dist/cli.js"
+  }
+}
